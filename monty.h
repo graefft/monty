@@ -58,7 +58,8 @@ typedef struct dlist_s
 extern dlist_t gl;
 
 int get_op(stack_t **stack, char *which);
-void push(char *n); 
+void opcode_push(stack_t **head, char *num); 
+void opcode_pall(stack_t **stack, unsigned int line_number);
 
 void exit_helper(int code, char *file);
 void free_stack(stack_t *stack);

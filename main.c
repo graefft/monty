@@ -12,7 +12,8 @@ dlist_t gl;
 int main(int argc, char **argv)
 {
 	char *which, *push_op;
-	int fd, len, get;
+	char *delim = " \t\r\n";
+	int fd, len, get, i = 0;
 	size_t bufsize = 0;
 	int find = 0;
 
@@ -27,7 +28,8 @@ int main(int argc, char **argv)
 
 	while (get = getline(&gl.line, &bufsize, gl.monty) != EOF)
 	{
-		which = strtok(gl.line, " ");
+		which = strtok(gl.line, delim);
+
 		if (*which == '#')
 		{
 			gl.ln++;
@@ -40,8 +42,11 @@ int main(int argc, char **argv)
 		}
 		if (strcmp(which, "push") == 0)
 		{
+			printf("STRCMP worked\n");
 			push_op = strtok(NULL, " ");
-			push(push_op);
+			if (!push_op)
+				printf("ERROR");
+			opcode_push(&gl.stack, push_op);
 			gl.ln++;
 			continue;
 		}
@@ -51,9 +56,9 @@ int main(int argc, char **argv)
 		gl.ln++;
 	}
 	free(gl.line);
-/**	close(fd);
+	close(fd);
 	fclose(gl.monty);
-*/	return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -66,8 +71,8 @@ int get_op(stack_t **stack, char *which)
 	char *op;
 	int i = 0;
 	instruction_t ops[] = {
-/**		{"pall", pall},
-		{"pint", pint},
+		{"pall", opcode_pall},
+/**		{"pint", pint},
 		{"pop", pop},
 		{"nop", nop},
 		{"swap", swap},
@@ -75,7 +80,7 @@ int get_op(stack_t **stack, char *which)
 */		{NULL, NULL}
 		};
 
-	op = strtok(which, "\n");
+	op = strtok(which, " ");
 
 	while (ops[i].opcode)
 	{
