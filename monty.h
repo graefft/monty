@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 /**
@@ -21,6 +22,7 @@ typedef struct stack_s
         struct stack_s *next;
 } stack_t;
 
+
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -36,8 +38,29 @@ typedef struct instruction_s
 } instruction_t;
 
 
-void push(stack_t **stack, unsigned int line_number) 
-void _exit(int code);
+/**
+ * struct dlist_s - global struct
+ * @line: line that is read
+ * @monty: file to be read from
+ * @read: read line
+ * @ln: line number
+ * @stack: stack
+ */
+typedef struct dlist_s
+{
+	char *line;
+	char **read;
+	FILE *monty;
+	stack_t *stack;
+	unsigned int ln;
+} dlist_t;
+
+extern dlist_t gl;
+
+int get_op(stack_t **stack, char *which);
+void push(stack_t **stack, unsigned int line_number); 
+
+void exit_helper(int code, char *file);
 void free_stack(stack_t *stack);
 
 #endif /* MONTY_H */
