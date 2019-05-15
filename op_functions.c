@@ -17,7 +17,7 @@ void opcode_push(stack_t **head, char *num)
 		exit_helper(4, NULL);
 	}
 	n = atoi(num);
-	
+
 	if (strlen(num) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer", gl.ln);
@@ -31,7 +31,7 @@ void opcode_push(stack_t **head, char *num)
 
 	if (*head != NULL)
 		(*head)->prev = new_node;
-	
+
 	*head = new_node;
 }
 
