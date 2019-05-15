@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 {
 	char *which, *push_op;
 	char *delim = " \t\r\n";
-	int fd, len, get, i = 0;
+	int get;
 	size_t bufsize = 0;
 	int find = 0;
 
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	if (gl.monty == NULL)
 		exit_helper(2, argv[1]);
 
-	while (get = getline(&gl.line, &bufsize, gl.monty) != EOF)
+	while ((get = getline(&gl.line, &bufsize, gl.monty)) != EOF)
 	{
 		which = strtok(gl.line, delim);
 		if (*which == '#' || which == NULL || (strcmp(which, "\n") == 0))
@@ -47,7 +47,6 @@ int main(int argc, char **argv)
 		gl.ln++;
 	}
 	free(gl.line);
-	close(fd);
 	fclose(gl.monty);
 	return (EXIT_SUCCESS);
 }
@@ -64,11 +63,6 @@ int get_op(stack_t **stack, char *which)
 	int i = 0;
 	instruction_t ops[] = {
 		{"pall", opcode_pall},
-		{"pint", pint},
-		{"pop", pop},
-		{"nop", nop},
-		{"swap", swap},
-		{"add", add},
 		{NULL, NULL}
 		};
 
