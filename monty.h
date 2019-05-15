@@ -35,7 +35,9 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void _exit(stack_t *stack);
+
+void push(stack_t **stack, unsigned int line_number) 
+void _exit(int code);
 void free_stack(stack_t *stack);
 
 #endif /* MONTY_H */
