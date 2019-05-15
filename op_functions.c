@@ -4,35 +4,35 @@
  * opcode_push - adds a new node at the end of a stack_t list
  * @head: pointer to the address of first linked list node
  * @n: integer to store in new node
- * Return: the address of the new element, or NULL if it failed
+ * Return: nothing
  */
-void *opcode_push(stack_t **head, char *n)
+void *opcode_push(stack_t **head, char *num)
 {
 	stack_t *new_node;
 	stack_t *last;
-	const int num;
+	int n;
 	int i;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 		return (NULL);
-	while (n)
+	while (num)
 	{
-		if (!isdigit(n[i]))
+		if (!isdigit(num[i]))
 		{
 			fprintf(stderr, "L%d: usage: push integer", gl.ln);
 			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
-	if (strlen(n) == 0)
+	if (strlen(num) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer", gl.ln);
 		exit(EXIT_FAILURE);
 	}
-	num = atoi(n);
+	n = atoi(num);
 
-	new_node->num = num;
+	new_node->n = n;
 	last = (*head);
 	new_node->next = NULL;
 
