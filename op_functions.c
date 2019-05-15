@@ -3,8 +3,8 @@
 /**
  * opcode_push - adds a new node at the end of a stack_t list
  * @head: pointer to the address of first linked list node
- * @n: integer to store in new node
- * Return: the address of the new element, or NULL if it failed
+ * @num: pointer to second argument of opcode
+ * Return: nothing
  */
 void opcode_push(stack_t **head, char *num)
 {
@@ -27,6 +27,7 @@ void opcode_push(stack_t **head, char *num)
 	new_node->n = n;
 	new_node->next = *head;
 	new_node->prev = NULL;
+	n = atoi(num);
 
 	if (*head != NULL)
 		(*head)->prev = new_node;
@@ -36,8 +37,9 @@ void opcode_push(stack_t **head, char *num)
 
 /**
  * opcode_pall - prints all the elements of a stack_t list
- * @h: pointer to first node in linked list
- * Return: the number of nodes
+ * @stack: pointer to the address of node in stack_t list
+ * @line_number: line number of opcode
+ * Return: nothing
  */
 void opcode_pall(stack_t **stack, unsigned int line_number)
 {
