@@ -6,20 +6,33 @@
  * @n: integer to store in new node
  * Return: the address of the new element, or NULL if it failed
  */
-void *opcode_push(stack_t **head, const int n)
+void *opcode_push(stack_t **head, char *n)
 {
 	stack_t *new_node;
 	stack_t *last;
+	const int num;
+	int i;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 		return (NULL);
-	if (n < 1)
+	while (n)
 	{
-		print("L%d: usage: push integer", gl.ln);
+		if (!isdigit(n[i]))
+		{
+			fprintf(stderr, "L%d: usage: push integer", gl.ln);
+			exit(EXIT_FAILURE);
+		}
+		i++;
+	}
+	if (strlen(n) == 0)
+	{
+		fprintf(stderr, "L%d: usage: push integer", gl.ln);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = n;
+	num = atoi(n);
+
+	new_node->num = num;
 	last = (*head);
 	new_node->next = NULL;
 
@@ -27,15 +40,12 @@ void *opcode_push(stack_t **head, const int n)
 	{
 		(*head) = NULL;
 		(*head) = new_node;
-		/*return (new_node); */
 	}
 
 	while (last->next != NULL)
 		last = last->next;
 	last->next = new_node;
 	new_node->prev = last;
-
-/*	return (new_node); */
 }
 
 /**
