@@ -6,7 +6,7 @@
  * @n: integer to store in new node
  * Return: the address of the new element, or NULL if it failed
  */
-stack_t *opcode_push(stack_t **head, const int n)
+void *opcode_push(stack_t **head, const int n)
 {
 	stack_t *new_node;
 	stack_t *last;
@@ -27,7 +27,7 @@ stack_t *opcode_push(stack_t **head, const int n)
 	{
 		(*head) = NULL;
 		(*head) = new_node;
-		return (new_node);
+		/*return (new_node); */
 	}
 
 	while (last->next != NULL)
@@ -35,7 +35,7 @@ stack_t *opcode_push(stack_t **head, const int n)
 	last->next = new_node;
 	new_node->prev = last;
 
-	return (new_node);
+/*	return (new_node); */
 }
 
 /**
@@ -43,17 +43,15 @@ stack_t *opcode_push(stack_t **head, const int n)
  * @h: pointer to first node in linked list
  * Return: the number of nodes
  */
-size_t opcode_pall(const stack_t *h)
+void opcode_pall(stack_t **stack, unsigned int line_number)
 {
+	(void) line_number;
 	const stack_t *temp;
-	size_t count = 0;
 
-	temp = h;
+	temp = (*stack);
 	while (temp != NULL)
 	{
 		temp = temp->next;
 		printf("%d\n", temp->n);
-		count++;
 	}
-	return (count);
 }
