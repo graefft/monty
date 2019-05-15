@@ -1,9 +1,18 @@
+#include "monty.h"
+
+
 /**
  *
  *
  */
-push
+void push(char *n)
+{
+	printf("push\n");
 
+
+}
+
+/**
 pall
 
 pint
@@ -11,3 +20,4 @@ pint
 pop
 
 nop
+*/

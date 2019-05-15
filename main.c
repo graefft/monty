@@ -11,7 +11,7 @@ dlist_t gl;
 
 int main(int argc, char **argv)
 {
-	char *which;
+	char *which, *push_op;
 	int fd, len, get;
 	size_t bufsize = 0;
 	int find = 0;
@@ -38,6 +38,13 @@ int main(int argc, char **argv)
 			gl.ln++;
 			continue;
 		}
+		if (strcmp(which, "push") == 0)
+		{
+			push_op = strtok(NULL, " ");
+			push(push_op);
+			gl.ln++;
+			continue;
+		}
 		find = get_op(&gl.stack, which);
 		if (!find)
 			exit_helper(3, gl.line);
@@ -59,7 +66,6 @@ int get_op(stack_t **stack, char *which)
 	char *op;
 	int i = 0;
 	instruction_t ops[] = {
-		{"push", push},
 /**		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
