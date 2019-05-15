@@ -18,24 +18,16 @@ int main(int argc, char **argv)
 	int find = 0;
 
 	gl.ln = 1;
-	/* wrong number of arguments */
 	if (argc != 2)
 		exit_helper(1, NULL);
 	gl.monty = fopen(argv[1], "r");
-	/* can't open file */
 	if (gl.monty == NULL)
 		exit_helper(2, argv[1]);
 
 	while (get = getline(&gl.line, &bufsize, gl.monty) != EOF)
 	{
 		which = strtok(gl.line, delim);
-
-		if (*which == '#' || which == NULL)
-		{
-			gl.ln++;
-			continue;
-		}
-		if (strcmp(which, "\n") == 0)
+		if (*which == '#' || which == NULL || (strcmp(which, "\n") == 0))
 		{
 			gl.ln++;
 			continue;
@@ -62,7 +54,8 @@ int main(int argc, char **argv)
 
 /**
  * get_op - selects correct function to perform operation
- * @s: name of op
+ * @stack: stack
+ * @which: parsed input
  * Return: pointer to function corresponding to operator
  */
 int get_op(stack_t **stack, char *which)
@@ -71,12 +64,12 @@ int get_op(stack_t **stack, char *which)
 	int i = 0;
 	instruction_t ops[] = {
 		{"pall", opcode_pall},
-/**		{"pint", pint},
+		{"pint", pint},
 		{"pop", pop},
 		{"nop", nop},
 		{"swap", swap},
 		{"add", add},
-*/		{NULL, NULL}
+		{NULL, NULL}
 		};
 
 	op = strtok(which, " ");
@@ -105,31 +98,40 @@ void exit_helper(int code, char *file)
 	switch (code)
 	{
 		case 1:
-			fprintf(stderr, "USAGE: monty file\n"); break;
+		{
+			fprintf(stderr, "USAGE: monty file\n");
+			break;
+		}
 		case 2:
-			fprintf(stderr, "Error: Can't open file %s\n", file); break;
+		{
+			fprintf(stderr, "Error: Can't open file %s\n", file);
+			break;
+		}
 		case 3:
-			fprintf(stderr, "L%d: unknown instruction %s\n", gl.ln, file); break;
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", gl.ln, file);
+			break;
+		}
 		case 4:
-			fprintf(stderr, "Error: malloc failed\n"); break;
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			break;
+		}
 		case 5:
-			fprintf(stderr, "L%d: usage: push integer\n", gl.ln); break;
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", gl.ln);
+			break;
+		}
 		case 6:
-			fprintf(stderr, "L%d: can't pint, stack empty\n", gl.ln); break;
+		{
+			fprintf(stderr, "L%d: can't pint, stack empty\n", gl.ln);
+			break;
+		}
 		case 7:
-			fprintf(stderr, "L%d: can't pop an empty stack\n", gl.ln); break;
-		case 8:
-			fprintf(stderr, "L%d: can't swap, stack too short\n", gl.ln); break;
-		case 9:
-			fprintf(stderr, "L%d: can't add, stack too short\n", gl.ln); break;
-		case 10:
-			fprintf(stderr, "L%d: can't sub, stack too short\n", gl.ln); break;
-		case 11:
-			fprintf(stderr, "L%d: can't div, stack too short\n", gl.ln); break;
-		case 12:
-			fprintf(stderr, "L%d: can't mul, stack too short\n", gl.ln); break;
-		case 13:
-			fprintf(stderr, "L%d: can't mod, stack too short\n", gl.ln); break;
+		{
+			fprintf(stderr, "L%d: can't pop an empty stack\n", gl.ln);
+			break;
+		}
 	}
 	exit(EXIT_FAILURE);
 }
