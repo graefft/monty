@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	{
 		which = strtok(gl.line, delim);
 
-		if (*which == '#')
+		if (*which == '#' || which == NULL)
 		{
 			gl.ln++;
 			continue;
@@ -42,16 +42,15 @@ int main(int argc, char **argv)
 		}
 		if (strcmp(which, "push") == 0)
 		{
-			printf("STRCMP worked\n");
-			push_op = strtok(NULL, " ");
+			push_op = strtok(NULL, delim);
 			if (!push_op)
-				printf("ERROR");
+				exit_helper(5, NULL);
 			opcode_push(&gl.stack, push_op);
 			gl.ln++;
 			continue;
 		}
 		find = get_op(&gl.stack, which);
-		if (!find)
+		if (find < 0)
 			exit_helper(3, gl.line);
 		gl.ln++;
 	}
@@ -109,7 +108,7 @@ void exit_helper(int code, char *file)
 			fprintf(stderr, "USAGE: monty file\n"); break;
 		case 2:
 			fprintf(stderr, "Error: Can't open file %s\n", file); break;
-/**		case 3:
+		case 3:
 			fprintf(stderr, "L%d: unknown instruction %s\n", gl.ln, file); break;
 		case 4:
 			fprintf(stderr, "Error: malloc failed\n"); break;
@@ -131,6 +130,6 @@ void exit_helper(int code, char *file)
 			fprintf(stderr, "L%d: can't mul, stack too short\n", gl.ln); break;
 		case 13:
 			fprintf(stderr, "L%d: can't mod, stack too short\n", gl.ln); break;
-*/	}
+	}
 	exit(EXIT_FAILURE);
 }
