@@ -1,5 +1,7 @@
 #include "monty.h"
 
+dlist_t gl;
+
 /**
  * main - entry point for Monty interpretor
  * @argc: number of arguments
@@ -7,20 +9,44 @@
  * Return: 0
  */
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	char *buffer = NULL;
-	FD *fd;
+	char *which;
+	int fd, len, get;
+	size_t bufsize = 0;
+	int find = 0;
 
-	fopen(argv[1], NULL);
-
+	gl.ln = 1;
 	/* wrong number of arguments */
 	if (argc != 2)
-		_exit(1);
+		exit_helper(1, NULL);
+	gl.monty = fopen(argv[1], "r");
 	/* can't open file */
-	if (FD == NULL)
-		_exit(2);
+	if (gl.monty == NULL)
+		exit_helper(2, argv[1]);
 
+	while (get = getline(&gl.line, &bufsize, gl.monty) != EOF)
+	{
+		which = strtok(gl.line, " ");
+		if (*which == '#')
+		{
+			gl.ln++;
+			continue;
+		}
+		if (strcmp(which, "\n") == 0)
+		{
+			gl.ln++;
+			continue;
+		}
+		find = get_op(&gl.stack, which);
+		if (!find)
+			exit_helper(3, gl.line);
+		gl.ln++;
+	}
+	free(gl.line);
+/**	close(fd);
+	fclose(gl.monty);
+*/	return (EXIT_SUCCESS);
 }
 
 /**
@@ -28,34 +54,43 @@ int main(int argc, char *argv[])
  * @s: name of op
  * Return: pointer to function corresponding to operator
  */
-int (*get_op(char *s))(struct stack_s)
+int get_op(stack_t **stack, char *which)
 {
-	instruction_s ops[] = {
+	char *op;
+	int i = 0;
+	instruction_t ops[] = {
 		{"push", push},
-		{"pall", pall},
+/**		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
 		{"nop", nop},
 		{"swap", swap},
 		{"add", add},
-		{NULL, NULL}
+*/		{NULL, NULL}
 		};
-	int i = 0;
 
-	while (ops[i].instruction_s)
+	op = strtok(which, "\n");
+
+	while (ops[i].opcode)
 	{
-		if (ops[i].instruction_s[0] == s[0] && !(*(s + 1)))
-			return (ops[i].f);
+		if (strcmp(op, ops[i].opcode) == 0)
+		{
+			ops[i].f(stack, gl.ln);
+			return (0);
+		}
 		i++;
 	}
-	return (NULL);
+	dprintf(STDERR_FILENO, "L%u: ", gl.ln);
+	dprintf(STDERR_FILENO, "unknown instruction %s\n", op);
+	return (-1);
+}
 
 /**
- * _exit - exit handler for monty program
+ * exit_helper - exit handler for monty program
  * @code: error number
+ * @file: input
  */
-
-void _exit(int code, char *file)
+void exit_helper(int code, char *file)
 {
 	switch (code)
 	{
@@ -63,7 +98,7 @@ void _exit(int code, char *file)
 			fprintf(stderr, "USAGE: monty file\n"); break;
 		case 2:
 			fprintf(stderr, "Error: Can't open file %s\n", file); break;
-		case 3:
+/**		case 3:
 			fprintf(stderr, "L%d: unknown instruction %s\n", gl.ln, file); break;
 		case 4:
 			fprintf(stderr, "Error: malloc failed\n"); break;
@@ -85,7 +120,6 @@ void _exit(int code, char *file)
 			fprintf(stderr, "L%d: can't mul, stack too short\n", gl.ln); break;
 		case 13:
 			fprintf(stderr, "L%d: can't mod, stack too short\n", gl.ln); break;
-	}
+*/	}
 	exit(EXIT_FAILURE);
 }
-
