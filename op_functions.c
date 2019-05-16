@@ -86,10 +86,7 @@ void opcode_pint(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	else
-	{
 		printf("%d\n", temp->n);
-		temp == NULL;
-	}
 }
 
 /**
