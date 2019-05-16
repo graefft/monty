@@ -81,12 +81,6 @@ int get_op(stack_t **stack, char *which)
 		}
 		i++;
 	}
-	if (!ops[i].opcode)
-	{
-		free_everything();
-		exit_helper(3, NULL);
-		exit(EXIT_FAILURE);
-	}
 	return (-1);
 }
 
