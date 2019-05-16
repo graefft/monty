@@ -22,7 +22,7 @@ void opcode_push(stack_t **head, char *num)
 	{
 		if (num[i] == '-')
 			i++;
-		if (num[i] < '1' || num[i] > '9')
+		if (num[i] < '0' || num[i] > '9')
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", gl.ln);
 			free_everything();
