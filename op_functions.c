@@ -75,15 +75,16 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
  */
 void opcode_pint(stack_t **stack, unsigned int line_number)
 {
-	const stack_t *temp;
-
 	(void)line_number;
-	temp = (*stack);
-	while (temp != NULL)
+	if ((*stack) == NULL)
 	{
-		printf("%d\n", temp->n);
-		temp = NULL;
+		fprintf(stderr, "L%d: can't pint, stack empty\n", gl.\
+			ln);
+		free_everything();
+		exit(EXIT_FAILURE);
 	}
+	printf("%d\n", (*stack)->n);
+	(*stack) = NULL;
 }
 
 /**
