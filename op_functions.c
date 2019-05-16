@@ -45,9 +45,9 @@ void opcode_push(stack_t **head, char *num)
  */
 void opcode_pall(stack_t **stack, unsigned int line_number)
 {
-	(void) line_number;
 	const stack_t *temp;
 
+	(void)line_number;
 	temp = (*stack);
 	while (temp != NULL)
 	{
