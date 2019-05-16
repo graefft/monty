@@ -24,14 +24,7 @@ void opcode_add(stack_t **stack, unsigned int line_number)
 	int result = 0;
 
 	(void)line_number;
-	if (stack == NULL || *stack == NULL)
-	{
-		fprintf(stderr, "L%u: can't add, stack is empty\n", gl.ln);
-		free_everything();
-		exit(EXIT_FAILURE);
-	}
-
-	if (current->next == NULL || current == NULL)
+	if (current == NULL || current->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", gl.ln);
 		free_everything();
@@ -41,9 +34,8 @@ void opcode_add(stack_t **stack, unsigned int line_number)
 	result = current->n + current->next->n;
 	current->next->n = result;
 	*stack = current->next;
-	if (current)
-		current->prev = NULL;
-	current = NULL;
+	free(current);
+	(*stack)->prev = NULL;
 }
 
 /**
