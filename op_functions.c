@@ -2,8 +2,8 @@
 
 /**
  * opcode_push - adds a new node at the end of a stack_t list
- * @head: pointer to the address of first linked list node
- * @num: pointer to second argument of opcode
+ * @head: pointer to the address of first node in a linked list
+ * @num: pointer to second argument in a line number
  * Return: nothing
  */
 void opcode_push(stack_t **head, char *num)
@@ -38,7 +38,7 @@ void opcode_push(stack_t **head, char *num)
 /**
  * opcode_pall - prints all the elements of a stack_t list
  * @stack: pointer to the address of node in stack_t list
- * @line_number: line number of opcode
+ * @line_number: line number in the file
  * Return: nothing
  */
 void opcode_pall(stack_t **stack, unsigned int line_number)
