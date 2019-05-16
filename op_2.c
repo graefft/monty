@@ -20,7 +20,8 @@ void opcode_nop(stack_t **stack, unsigned int line_number)
  */
 void opcode_add(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
 }
 
 /**
@@ -31,7 +32,8 @@ void opcode_add(stack_t **stack, unsigned int line_number)
  */
 void opcode_sub(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
 }
 
 /**
@@ -42,7 +44,8 @@ void opcode_sub(stack_t **stack, unsigned int line_number)
  */
 void opcode_mul(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
 }
 /**
  * opcode_div - divides top two elements of stack
@@ -52,5 +55,6 @@ void opcode_mul(stack_t **stack, unsigned int line_number)
  */
 void opcode_div(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
 }
