@@ -60,15 +60,31 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 	temp = (*stack);
-	while (temp != NULL)
+	while (temp != temp->prev)
 	{
 		printf("%d\n", temp->n);
 		temp = temp->next;
 	}
 }
 
+/**
+ * opcode_pint - prints the value at the top of the stack
+ * @stack: pointer to the address of node in stack_t list
+ * @line_number: line number in the file
+ * Return: nothing
+ */
+void opcode_pint(stack_t **stack, unsigned int line_number)
+{
+	const stack_t *temp;
 
-
+	(void)line_number;
+	temp = (*stack);
+	while (temp != NULL)
+	{
+		printf("%d\n", temp->n);
+		temp = NULL;
+	}
+}
 
 /**
  * opcode_nop - does not perform the instruction
