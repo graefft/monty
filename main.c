@@ -70,7 +70,7 @@ int get_op(stack_t **stack, char *which)
 		{NULL, NULL}
 		};
 
-	op = strtok(which, " ");
+	op = strtok(which, " \n");
 
 	while (ops[i].opcode)
 	{
