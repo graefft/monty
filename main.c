@@ -11,13 +11,11 @@ dlist_t gl;
 
 int main(int argc, char **argv)
 {
-	char *which, *push_op;
-	char *delim = " \t\r\n";
-	int get;
+	char *which, *push_op, *delim = " \t\r\n";
+	int get, find = 0;
 	size_t bufsize = 0;
-	int find = 0;
 
-	gl.ln = 1;
+	initialize();
 	if (argc != 2)
 		exit_helper(1, NULL);
 	gl.monty = fopen(argv[1], "r");
@@ -127,4 +125,16 @@ void exit_helper(int code, char *file)
 		}
 	}
 	exit(EXIT_FAILURE);
+}
+
+/**
+ * initialize - initializes struct
+ */
+void initialize(void)
+{
+	gl.monty = NULL;
+	gl.line = NULL;
+	gl.ln = 1;
+	gl.read = NULL;
+	gl.stack = NULL;
 }
