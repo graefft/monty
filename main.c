@@ -46,8 +46,7 @@ int main(int argc, char **argv)
 			exit_helper(3, gl.line);
 		gl.ln++;
 	}
-	free(gl.line);
-	fclose(gl.monty);
+	free_everything();
 	return (EXIT_SUCCESS);
 }
 
