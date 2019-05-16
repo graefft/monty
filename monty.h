@@ -66,6 +66,6 @@ void initialize(void);
 void exit_helper(int code, char *file);
 void free_dlistint(stack_t *head);
 void free_stack(stack_t *stack);
-void free_everything();
+void free_everything(void);
 
 #endif /* MONTY_H */
