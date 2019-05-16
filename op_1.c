@@ -120,12 +120,19 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
  */
 void opcode_swap(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp = *stack;
 	stack_t *current = *stack;
+	stack_t *temp = NULL;
 	int x;
 
 	(void)line_number;
-	if (current->next == NULL || current == NULL || *stack == NULL)
+	if (stack == NULL || *stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
+	temp = current;
+	if (current->next == NULL || current == NULL)
 	{
 		fprintf(stderr, "L%u: can't swap, stack too short\n", gl.ln);
 		free_everything();
