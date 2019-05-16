@@ -10,6 +10,7 @@ void opcode_push(stack_t **head, char *num)
 {
 	stack_t *new_node;
 	int n = 0;
+	int i;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
@@ -17,11 +18,23 @@ void opcode_push(stack_t **head, char *num)
 		free_everything();
 		exit_helper(4, NULL);
 	}
+	for (i = 0; num[i]; i++)
+	{
+		if (num[i] == '-')
+			i++;
+		if (num[i] < '1' || num[i] > '9')
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", gl.ln);
+			free_everything();
+			exit(EXIT_FAILURE);
+		}
+	}
+
 	n = atoi(num);
 
 	if (strlen(num) == 0)
 	{
-		fprintf(stderr, "L%d: usage: push integer", gl.ln);
+		fprintf(stderr, "L%d: usage: push integer\n", gl.ln);
 		free_everything();
 		exit(EXIT_FAILURE);
 	}
