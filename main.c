@@ -24,10 +24,10 @@ int main(int argc, char **argv)
 
 	while ((get = getline(&gl.line, &bufsize, gl.monty)) != EOF)
 	{
+		gl.ln++;
 		which = strtok(gl.line, delim);
-		if (which == NULL || (strcmp(which, "\n") == 0) || *which == '#')
+		if (which == NULL || *which == '#')
 		{
-			gl.ln++;
 			continue;
 		}
 		if (strcmp(which, "push") == 0)
@@ -39,7 +39,6 @@ int main(int argc, char **argv)
 				exit_helper(5, NULL);
 			}
 			opcode_push(&gl.stack, push_op);
-			gl.ln++;
 			continue;
 		}
 		find = get_op(&gl.stack, which);
@@ -47,7 +46,6 @@ int main(int argc, char **argv)
 		{
 			exit_helper(3, gl.line);
 		}
-		gl.ln++;
 	}
 	free_everything();
 	return (EXIT_SUCCESS);
@@ -142,7 +140,7 @@ void initialize(void)
 {
 	gl.monty = NULL;
 	gl.line = NULL;
-	gl.ln = 1;
+	gl.ln = 0;
 	gl.read = NULL;
 	gl.stack = NULL;
 }
