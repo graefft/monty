@@ -44,7 +44,9 @@ int main(int argc, char **argv)
 		}
 		find = get_op(&gl.stack, which);
 		if (find < 0)
+		{
 			exit_helper(3, gl.line);
+		}
 		gl.ln++;
 	}
 	free_everything();
@@ -79,8 +81,6 @@ int get_op(stack_t **stack, char *which)
 		}
 		i++;
 	}
-	dprintf(STDERR_FILENO, "L%u: ", gl.ln);
-	dprintf(STDERR_FILENO, "unknown instruction %s\n", op);
 	return (-1);
 }
 
@@ -105,7 +105,8 @@ void exit_helper(int code, char *file)
 		}
 		case 3:
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", gl.ln, file);
+			fprintf(stderr, "L%u: unknown instruction %s\n", gl.ln, file);
+			free_everything();
 			break;
 		}
 		case 4:
@@ -115,12 +116,12 @@ void exit_helper(int code, char *file)
 		}
 		case 5:
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", gl.ln);
+			fprintf(stderr, "L%u: usage: push integer\n", gl.ln);
 			break;
 		}
 		case 6:
 		{
-			fprintf(stderr, "L%d: can't pint, stack empty\n", gl.ln);
+			fprintf(stderr, "L%u: can't pint, stack empty\n", gl.ln);
 			break;
 		}
 		case 7:
