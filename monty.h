@@ -60,10 +60,11 @@ extern dlist_t gl;
 int get_op(stack_t **stack, char *which);
 void opcode_push(stack_t **head, char *num);
 void opcode_pall(stack_t **stack, unsigned int line_number);
+void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_nop(stack_t **stack, unsigned int line_number);
 void initialize(void);
 void exit_helper(int code, char *file);
 void free_dlistint(stack_t *head);
 void free_stack(stack_t *stack);
-void free_everything();
+void free_everything(void);
 #endif /* MONTY_H */
