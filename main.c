@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 		{
 			push_op = strtok(NULL, delim);
 			if (!push_op)
+				free_everything();
 				exit_helper(5, NULL);
 			opcode_push(&gl.stack, push_op);
 			gl.ln++;
