@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	while ((get = getline(&gl.line, &bufsize, gl.monty)) != EOF)
 	{
 		which = strtok(gl.line, delim);
-		if (*which == '#' || which == NULL || (strcmp(which, "\n") == 0))
+		if (which == NULL || (strcmp(which, "\n") == 0) || *which == '#')
 		{
 			gl.ln++;
 			continue;

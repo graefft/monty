@@ -18,6 +18,7 @@ void opcode_push(stack_t **head, char *num)
 		free_everything();
 		exit_helper(4, NULL);
 	}
+
 	for (i = 0; num[i]; i++)
 	{
 		if (num[i] == '-')
@@ -29,16 +30,13 @@ void opcode_push(stack_t **head, char *num)
 			exit(EXIT_FAILURE);
 		}
 	}
-
 	n = atoi(num);
-
 	if (strlen(num) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", gl.ln);
 		free_everything();
 		exit(EXIT_FAILURE);
 	}
-
 	new_node->n = n;
 	new_node->next = *head;
 	new_node->prev = NULL;
@@ -67,4 +65,19 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", temp->n);
 		temp = temp->next;
 	}
+}
+
+
+
+
+/**
+ * opcode_nop - does not perform the instruction
+ * @stack: pointer to the address of node in stack_t list
+ * @line_number: line number in the file
+ * Return: nothing
+ */
+void opcode_nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
 }
