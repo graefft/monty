@@ -60,7 +60,7 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
 
 	(void)line_number;
 	temp = (*stack);
-	while (temp != temp->prev)
+	while (temp != NULL)
 	{
 		printf("%d\n", temp->n);
 		temp = temp->next;
