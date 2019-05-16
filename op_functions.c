@@ -14,6 +14,7 @@ void opcode_push(stack_t **head, char *num)
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
+		free_everything();
 		exit_helper(4, NULL);
 	}
 	n = atoi(num);
@@ -21,6 +22,7 @@ void opcode_push(stack_t **head, char *num)
 	if (strlen(num) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer", gl.ln);
+		free_everything();
 		exit(EXIT_FAILURE);
 	}
 
