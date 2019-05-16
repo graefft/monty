@@ -78,8 +78,7 @@ void opcode_pint(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	if ((*stack) == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", gl.\
-			ln);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", gl.ln);
 		free_everything();
 		exit(EXIT_FAILURE);
 	}
