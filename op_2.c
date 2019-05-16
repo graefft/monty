@@ -41,6 +41,8 @@ void opcode_add(stack_t **stack, unsigned int line_number)
 	result = current->n + current->next->n;
 	current->next->n = result;
 	*stack = current->next;
+	if (current)
+		current->prev = NULL;
 	current = NULL;
 }
 
