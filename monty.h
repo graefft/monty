@@ -62,6 +62,7 @@ void opcode_push(stack_t **head, char *num);
 void opcode_pall(stack_t **stack, unsigned int line_number);
 void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
+void opcode_swap(stack_t **stack, unsigned int line_number);
 void opcode_nop(stack_t **stack, unsigned int line_number);
 void initialize(void);
 void exit_helper(int code, char *file);
