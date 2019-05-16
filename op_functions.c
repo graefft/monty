@@ -90,6 +90,29 @@ void opcode_pint(stack_t **stack, unsigned int line_number)
 }
 
 /**
+ * opcode_pop - removes the top element of the stack
+ * @stack: pointer to address of node in stack_t list
+ * @line_number: line number in file
+ * Return: void
+ */
+void opcode_pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+	stack_t *current = *stack;
+
+	(void)line_number;
+	if (current == NULL)
+		exit_helper(7, NULL);
+
+	temp = current->next;
+	free(current);
+	*stack = temp;
+	current = *stack;
+	if (current)
+		current->prev = NULL;
+}
+
+/**
  * opcode_nop - does not perform the instruction
  * @stack: pointer to the address of node in stack_t list
  * @line_number: line number in the file
