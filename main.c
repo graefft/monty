@@ -61,6 +61,7 @@ int get_op(stack_t **stack, char *which)
 	instruction_t ops[] = {
 		{"pall", opcode_pall},
 		{"pint", opcode_pint},
+		{"nop", opcode_nop},
 		{NULL, NULL}
 		};
 
