@@ -24,19 +24,19 @@ void opcode_add(stack_t **stack, unsigned int line_number)
 	int result = 0;
 
 	(void)line_number;
-        if (stack == NULL || *stack == NULL)
-        {
-                fprintf(stderr, "L%u: can't add, stack is empty\n", gl.ln);
-                free_everything();
-                exit(EXIT_FAILURE);
-        }
+	if (stack == NULL || *stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't add, stack is empty\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
 
-        if (current->next == NULL || current == NULL)
-        {
-                fprintf(stderr, "L%u: can't add, stack too short", gl.ln);
-                free_everything();
-                exit(EXIT_FAILURE);
-        }
+	if (current->next == NULL || current == NULL)
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
 
 	result = current->n + current->next->n;
 	current->next->n = result;
