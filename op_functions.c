@@ -10,6 +10,8 @@ void opcode_push(stack_t **head, char *num)
 {
 	stack_t *new_node;
 	int n = 0;
+	int i;
+
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
 	{
@@ -18,7 +20,7 @@ void opcode_push(stack_t **head, char *num)
 	}
 	for (i = 0; num[i]; i++)
 	{
-		if (num[i] == "-")
+		if (num[i] == '-')
 			i++;
 		if (num[i] < '1' || num[i] > '9')
 		{
