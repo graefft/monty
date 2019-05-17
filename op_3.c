@@ -92,7 +92,7 @@ void opcode_pstr(stack_t **stack, unsigned int line_number)
  */
 void opcode_rotl(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
+	stack_t *temp = NULL;
 
 	(void)line_number;
 
@@ -105,8 +105,8 @@ void opcode_rotl(stack_t **stack, unsigned int line_number)
 			temp = temp->next;
 
 		temp->next = (*stack)->prev;
-		(*stack)->prev->prev = temp;
 		(*stack)->prev->next = NULL;
+		(*stack)->prev->prev = temp;
 		(*stack)->prev = NULL;
 	}
 }
