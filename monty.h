@@ -58,19 +58,24 @@ typedef struct dlist_s
 extern dlist_t gl;
 
 int get_op(stack_t **stack, char *which);
+
 void opcode_push(stack_t **head, char *num);
 void opcode_pall(stack_t **stack, unsigned int line_number);
 void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
 void opcode_swap(stack_t **stack, unsigned int line_number);
+
 void opcode_add(stack_t **stack, unsigned int line_number);
 void opcode_nop(stack_t **stack, unsigned int line_number);
 void opcode_sub(stack_t **stack, unsigned int line_number);
 void opcode_mul(stack_t **stack, unsigned int line_number);
 void opcode_div(stack_t **stack, unsigned int line_number);
+
 void opcode_mod(stack_t **stack, unsigned int line_number);
 void opcode_pchar(stack_t **stack, unsigned int line_number);
 void opcode_pstr(stack_t **stack, unsigned int line_number);
+void opcode_rotl(stack_t **stack, unsigned int line_number);
+
 void initialize(void);
 void exit_helper(int code, char *file);
 void free_dlistint(stack_t *head);
