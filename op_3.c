@@ -118,22 +118,21 @@ void opcode_rotl(stack_t **stack, unsigned int line_number)
  */
 void opcode_rotr(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp = NULL;
-	stack_t *current;
+	stack_t *temp;
 
 	(void)line_number;
 
 	if (*stack && (*stack)->next)
 	{
-		current = *stack;
 		temp = *stack;
-		
-		while (temp->next)
+
+		while (temp->next->next)
 			temp = temp->next;
 
-		*stack = temp;
-		(*stack)->next = current;
-		(*stack)->next->prev = NULL;
-		temp = NULL;
+		temp->next->next = *stack;
+		(*stack)->prev = temp->next;
+		*stack = temp->next;
+		(*stack)->prev = NULL;
+		temp->next = NULL;
 	}
 }
