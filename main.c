@@ -75,6 +75,7 @@ int get_op(stack_t **stack, char *which)
 		{"pchar", opcode_pchar},
 		{"pstr", opcode_pstr},
 		{"rotl", opcode_rotl},
+		{"rotr", opcode_rotr},
 		{NULL, NULL}
 		};
 
