@@ -8,30 +8,29 @@
  */
 void opcode_mod(stack_t **stack, unsigned int line_number)
 {
-        stack_t *current = *stack;
-        int result = 0;
+	stack_t *current = *stack;
+	int result = 0;
 
-        (void)line_number;
-        if (current == NULL || current->next == NULL)
-        {
-                fprintf(stderr, "L%u: can't mod, stack too short\n", gl\
-			.ln);
-                free_everything();
-                exit(EXIT_FAILURE);
-        }
+	(void)line_number;
+	if (current == NULL || current->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't mod, stack too short\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
 
-        if (current->n == 0)
-        {
-                fprintf(stderr, "L%u: division by zero\n", gl.ln);
-                free_everything();
-                exit(EXIT_FAILURE);
-        }
+	if (current->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
 
-        result = current->next->n % current->n;
-        current->next->n = result;
-        *stack = current->next;
-        free(current);
-        (*stack)->prev = NULL;
+	result = current->next->n % current->n;
+	current->next->n = result;
+	*stack = current->next;
+	free(current);
+	(*stack)->prev = NULL;
 }
 
 /**
@@ -63,7 +62,7 @@ void opcode_pchar(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * opcode_pstr - prints string starting with top of stack until stack is empty or 0
+ * opcode_pstr - prints string starting with top of stack until stack is empty
  * @stack: pointer to address of stack
  * @line_number: line number
  */
@@ -84,4 +83,29 @@ void opcode_pstr(stack_t **stack, unsigned int line_number)
 		current = current->next;
 	}
 	printf("\n");
+}
+
+/**
+ * opcode_rotl - rotates stack to the top
+ * @stack: pointer to address of stack
+ * @line_number: line number
+ */
+void opcode_rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+
+	(void)line_number;
+	temp = *stack;
+
+	if (!*stack || !(*stack)->next)
+		return;
+	*stack = (*stack)->next;
+
+	while (temp->next)
+		temp = temp->next;
+
+	temp->next = (*stack)->prev;
+	(*stack)->prev->prev = temp;
+	(*stack)->prev = NULL;
+	temp->next->next = NULL;
 }
