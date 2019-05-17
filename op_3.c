@@ -14,7 +14,7 @@ void opcode_mod(stack_t **stack, unsigned int line_number)
         (void)line_number;
         if (current == NULL || current->next == NULL)
         {
-                fprintf(stderr, "L%u: can't div, stack too short\n", gl\
+                fprintf(stderr, "L%u: can't mod, stack too short\n", gl\
 			.ln);
                 free_everything();
                 exit(EXIT_FAILURE);
