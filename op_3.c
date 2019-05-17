@@ -97,7 +97,7 @@ void opcode_rotl(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	temp = *stack;
 
-	if (*stack || (*stack)->next)
+	if (*stack && (*stack)->next)
 	{
 		*stack = (*stack)->next;
 
