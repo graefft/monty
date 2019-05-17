@@ -106,7 +106,7 @@ void opcode_rotl(stack_t **stack, unsigned int line_number)
 
 		temp->next = (*stack)->prev;
 		(*stack)->prev->prev = temp;
+		(*stack)->prev->next = NULL;
 		(*stack)->prev = NULL;
-		temp->next->next = NULL;
 	}
 }
