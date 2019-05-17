@@ -95,10 +95,10 @@ void opcode_rotl(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 
 	(void)line_number;
-	temp = *stack;
 
-	if (*stack && (*stack)->next)
+	if (*stack != NULL && (*stack)->next != NULL)
 	{
+		temp = *stack;
 		*stack = (*stack)->next;
 
 		while (temp->next)
