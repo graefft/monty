@@ -13,7 +13,7 @@ void set_queue(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * set_sstack - sets to stack
+ * set_stack - sets to stack
  * @stack: pointer
  * @line_number: line number
  */

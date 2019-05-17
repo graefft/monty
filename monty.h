@@ -41,6 +41,7 @@ typedef struct instruction_s
 
 /**
  * struct dlist_s - global struct
+ * @qs: queue / stack flag
  * @line: line that is read
  * @monty: file to be read from
  * @read: read line
