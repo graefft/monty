@@ -20,19 +20,36 @@ Give examples
 
 ### Installing
 
-
-### Break down into end to end tests
-
+Clone the repository and compile with GCC
 ```
-Give an example
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 ```
 
-### And coding style tests
+### Usage
 
+```
+./monty bytecodes/<FILE>
+```
 
-## Deployment
+### Possible Arguments
 
-Add additional notes about how to deploy this on a live system
+ARGUMENT | DESCRIPTION
+----|----
+push <int> | Pushes integer to stack
+pall | Prints the stack
+pint | Prints the top of stack
+pop | Removes top element
+swap | Swaps top two elements of stack
+add | Adds top two elements of stack
+nop | Does nothing
+sub | Subtracts top element of stack from second top element
+div | Divides
+mul | Multiplies
+mod | Computes rest of division of second top element by top element
+pchar | Prints the char at top of stack (converts int to ASCII)
+pstr | Prints the string until stack is over or 0
+rotl | Rotates stack to top
+rotr | Rotates stack to bottom
 
 ## Built With
 
@@ -49,6 +66,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Thank you David Kwan for the free_everything idea
+* Thanks to Van Duy Pham and everyone else at Holberton who helped us
