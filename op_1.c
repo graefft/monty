@@ -40,11 +40,9 @@ void opcode_push(stack_t **head, char *num)
 	new_node->n = n;
 	new_node->next = *head;
 	new_node->prev = NULL;
-	n = atoi(num);
 
 	if (*head != NULL)
 		(*head)->prev = new_node;
-
 	*head = new_node;
 }
 
@@ -142,5 +140,4 @@ void opcode_swap(stack_t **stack, unsigned int line_number)
 	x = current->next->n;
 	current->next->n = temp->n;
 	current->n = x;
-
 }

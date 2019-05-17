@@ -68,6 +68,10 @@ int get_op(stack_t **stack, char *which)
 		{"swap", opcode_swap},
 		{"add", opcode_add},
 		{"nop", opcode_nop},
+		{"sub", opcode_sub},
+		{"mul", opcode_mul},
+		{"div", opcode_div},
+		{"mod", opcode_mod},
 		{NULL, NULL}
 		};
 
