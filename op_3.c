@@ -97,15 +97,16 @@ void opcode_rotl(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	temp = *stack;
 
-	if (!*stack || !(*stack)->next)
-		return;
-	*stack = (*stack)->next;
+	if (*stack || (*stack)->next)
+	{
+		*stack = (*stack)->next;
 
-	while (temp->next)
-		temp = temp->next;
+		while (temp->next)
+			temp = temp->next;
 
-	temp->next = (*stack)->prev;
-	(*stack)->prev->prev = temp;
-	(*stack)->prev = NULL;
-	temp->next->next = NULL;
+		temp->next = (*stack)->prev;
+		(*stack)->prev->prev = temp;
+		(*stack)->prev = NULL;
+		temp->next->next = NULL;
+	}
 }
