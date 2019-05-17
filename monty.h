@@ -69,6 +69,7 @@ void opcode_sub(stack_t **stack, unsigned int line_number);
 void opcode_mul(stack_t **stack, unsigned int line_number);
 void opcode_div(stack_t **stack, unsigned int line_number);
 void opcode_mod(stack_t **stack, unsigned int line_number);
+void opcode_pchar(stack_t **stack, unsigned int line_number);
 void initialize(void);
 void exit_helper(int code, char *file);
 void free_dlistint(stack_t *head);
