@@ -33,3 +33,31 @@ void opcode_mod(stack_t **stack, unsigned int line_number)
         free(current);
         (*stack)->prev = NULL;
 }
+
+/**
+ * opcode_pchar - prints the char at the top of the stack
+ * @stack: pointer to address of stack
+ * @line_number: line number
+ * Return: void
+ */
+void opcode_pchar(stack_t **stack, unsigned int line_number)
+{
+	 stack_t *current;
+
+	(void)line_number;
+	current = *stack;
+	if (current == NULL)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
+	else if (current->n < 0 || current->n > 127)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", gl.ln);
+		free_everything();
+		exit(EXIT_FAILURE);
+	}
+	else
+		printf("%c\n", current->n);
+}
