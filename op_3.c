@@ -61,3 +61,26 @@ void opcode_pchar(stack_t **stack, unsigned int line_number)
 	else
 		printf("%c\n", current->n);
 }
+
+/**
+ * opcode_pstr - prints string starting with top of stack until stack is empty or 0
+ * @stack: pointer to address of stack
+ * @line_number: line number
+ */
+void opcode_pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current;
+
+	(void)line_number;
+	current = *stack;
+	if (current == NULL)
+	{
+		printf("\n");
+	}
+	while (current && current->n != 0 && current->n > 0 && current->n <= 127)
+	{
+		printf("%c", current->n);
+		current = current->next;
+	}
+	printf("\n");
+}
