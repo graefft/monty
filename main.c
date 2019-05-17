@@ -31,7 +31,10 @@ int main(int argc, char **argv)
 			push_op = strtok(NULL, delim);
 			if (!push_op)
 				exit_helper(5, NULL);
-			opcode_push(&gl.stack, push_op);
+			if (gl.qs == false)
+				opcode_push(&gl.stack, push_op);
+			else if (gl.qs == true)
+				opcode_queue(&gl.stack, push_op);
 			continue;
 		}
 		if (get_op(&gl.stack, which_op) < 0)
@@ -52,6 +55,8 @@ int get_op(stack_t **stack, char *which)
 	char *op;
 	int i = 0;
 	instruction_t ops[] = {
+		{"stack", set_stack},
+		{"queue", set_queue},
 		{"pall", opcode_pall},
 		{"pint", opcode_pint},
 		{"pop", opcode_pop},
@@ -138,4 +143,5 @@ void initialize(void)
 	gl.ln = 0;
 	gl.read = NULL;
 	gl.stack = NULL;
+	gl.qs = false;
 }
