@@ -76,6 +76,7 @@ void opcode_pstr(stack_t **stack, unsigned int line_number)
 	if (current == NULL)
 	{
 		printf("\n");
+		return;
 	}
 	while (current && current->n != 0 && current->n > 0 && current->n < 127)
 	{
