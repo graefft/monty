@@ -31,6 +31,7 @@ $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 * one operator per line
 * spaces and new lines are ignored
 * '#' sign represents comments and rest of line is ignored
+* examples can be found in [bytecodes](./bytecodes) directory
 
 ### Possible Operators
 
@@ -79,5 +80,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Thank you David Kwan for the free_everything idea
-* Thank you Van Duy Pham, Tim Assavarat, and everyone else at Holberton who helped us
+* Thank you [David Kwan](https://github.com/dwkwan) for the free_everything idea
+* Thank you [Van Duy Pham](https://github.com/vdphan), [Tim Assavarat](https://github.com/tassavarat), and everyone else at Holberton who helped us
