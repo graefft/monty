@@ -72,6 +72,8 @@ pchar | Prints the char at top of stack (converts int to ASCII)
 pstr | Prints the string until stack is over or 0
 rotl | Rotates stack to top
 rotr | Rotates stack to bottom
+stack | Sets format of the data to a stack (LIFO) [default]
+queue | Sets format of the data to a queue (FIFO)
 
 
 ### Files and contents
@@ -85,7 +87,8 @@ FILE | DESCRIPTION
 [op_3.c](./op_3.c) | Contains mod, pchar, pstr, rotl, and rotr functions
 [queue.c](./queue.c) | Contains functions to set to queue or stack mode and function to add node at end of list (queue)
 [free.c](./free.c) | Function to free a doubly-linked list and free_everything helper function
-
+[bytecodes](./bytecodes) | Directory containing example bytecode files
+[bf](./bf) | Directory containing Brainf\*ck scripts
 
 ## Built With
 
