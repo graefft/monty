@@ -12,15 +12,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+GCC 4.8.4 (recommended)
 
 ### Installing
 
-Clone the repository and compile with GCC
+Clone the repository and compile with GCC:
 ```
 $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 ```
@@ -31,7 +27,12 @@ $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 ./monty bytecodes/<FILE>
 ```
 
-### Possible Arguments
+* filename should contain the operators (listed below)
+* one operator per line
+* spaces and new lines are ignored
+* '#' sign represents comments and rest of line is ignored
+
+### Possible Operators
 
 ARGUMENT | DESCRIPTION
 ----|----
@@ -51,6 +52,18 @@ pstr | Prints the string until stack is over or 0
 rotl | Rotates stack to top
 rotr | Rotates stack to bottom
 
+
+### Files and contents
+FILE | DESCRIPTION
+----|----
+[monty.h](./monty.h) | Header file containing structures and prototypes
+[main.c](./main.c) | Entry point for program, parses commands and checks with get_op function, exit helper, function to initialize global struct
+[op_1.c](./op_1.c) | Contains push, pall, pint, pop, and swap functions
+[op_2.c](./op_2.c) | Contains nop, add, sub, mul, and div functions
+[op_3.c](./op_3.c) | Contains mod, pchar, pstr, rotl, and rotr functions
+[queue.c](./queue.c) | Contains functions to set to queue or stack mode and function to add node at end of list (queue)
+[free.c](./free.c) | Function to free a doubly-linked list and free_everything helper function
+
 ## Built With
 
 * [C](https://en.wikipedia.org/wiki/C_(programming_language)) - Programming language
@@ -67,4 +80,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Thank you David Kwan for the free_everything idea
-* Thanks to Van Duy Pham and everyone else at Holberton who helped us
+* Thank you Van Duy Pham, Tim Assavarat, and everyone else at Holberton who helped us
