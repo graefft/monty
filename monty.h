@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -40,6 +41,7 @@ typedef struct instruction_s
 
 /**
  * struct dlist_s - global struct
+ * @qs: queue / stack flag
  * @line: line that is read
  * @monty: file to be read from
  * @read: read line
@@ -48,6 +50,7 @@ typedef struct instruction_s
  */
 typedef struct dlist_s
 {
+	_Bool qs;
 	char *line;
 	char **read;
 	FILE *monty;
@@ -57,28 +60,38 @@ typedef struct dlist_s
 
 extern dlist_t gl;
 
-int get_op(stack_t **stack, char *which);
-
+/* op_1.c */
 void opcode_push(stack_t **head, char *num);
 void opcode_pall(stack_t **stack, unsigned int line_number);
 void opcode_pint(stack_t **stack, unsigned int line_number);
 void opcode_pop(stack_t **stack, unsigned int line_number);
 void opcode_swap(stack_t **stack, unsigned int line_number);
 
+/* op_2.c */
 void opcode_add(stack_t **stack, unsigned int line_number);
 void opcode_nop(stack_t **stack, unsigned int line_number);
 void opcode_sub(stack_t **stack, unsigned int line_number);
 void opcode_mul(stack_t **stack, unsigned int line_number);
 void opcode_div(stack_t **stack, unsigned int line_number);
 
+/* op_3.c */
 void opcode_mod(stack_t **stack, unsigned int line_number);
 void opcode_pchar(stack_t **stack, unsigned int line_number);
 void opcode_pstr(stack_t **stack, unsigned int line_number);
 void opcode_rotl(stack_t **stack, unsigned int line_number);
 void opcode_rotr(stack_t **stack, unsigned int line_number);
 
+/* queue.c */
+void opcode_queue(stack_t **stack, char *num);
+void set_stack(stack_t **stack, unsigned int line_number);
+void set_queue(stack_t **stack, unsigned int line_number);
+
+/* main.c */
+int get_op(stack_t **stack, char *which);
 void initialize(void);
 void exit_helper(int code, char *file);
+
+/* free.c */
 void free_dlistint(stack_t *head);
 void free_stack(stack_t *stack);
 void free_everything(void);

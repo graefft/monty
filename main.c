@@ -11,8 +11,7 @@ dlist_t gl;
 
 int main(int argc, char **argv)
 {
-	char *which, *push_op, *delim = " \t\r\n";
-	int get, find = 0;
+	char *which_op, *push_op, *delim = " \t\r\n";
 	size_t bufsize = 0;
 
 	initialize();
@@ -21,31 +20,25 @@ int main(int argc, char **argv)
 	gl.monty = fopen(argv[1], "r");
 	if (gl.monty == NULL)
 		exit_helper(2, argv[1]);
-
-	while ((get = getline(&gl.line, &bufsize, gl.monty)) != EOF)
+	while (getline(&gl.line, &bufsize, gl.monty) != EOF)
 	{
 		gl.ln++;
-		which = strtok(gl.line, delim);
-		if (which == NULL || *which == '#')
-		{
+		which_op = strtok(gl.line, delim);
+		if (which_op == NULL || *which_op == '#')
 			continue;
-		}
-		if (strcmp(which, "push") == 0)
+		if (strcmp(which_op, "push") == 0)
 		{
 			push_op = strtok(NULL, delim);
 			if (!push_op)
-			{
-				free_everything();
 				exit_helper(5, NULL);
-			}
-			opcode_push(&gl.stack, push_op);
+			if (gl.qs == false)
+				opcode_push(&gl.stack, push_op);
+			else if (gl.qs == true)
+				opcode_queue(&gl.stack, push_op);
 			continue;
 		}
-		find = get_op(&gl.stack, which);
-		if (find < 0)
-		{
+		if (get_op(&gl.stack, which_op) < 0)
 			exit_helper(3, gl.line);
-		}
 	}
 	free_everything();
 	return (EXIT_SUCCESS);
@@ -62,6 +55,8 @@ int get_op(stack_t **stack, char *which)
 	char *op;
 	int i = 0;
 	instruction_t ops[] = {
+		{"stack", set_stack},
+		{"queue", set_queue},
 		{"pall", opcode_pall},
 		{"pint", opcode_pint},
 		{"pop", opcode_pop},
@@ -126,11 +121,7 @@ void exit_helper(int code, char *file)
 		case 5:
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", gl.ln);
-			break;
-		}
-		case 6:
-		{
-			fprintf(stderr, "L%u: can't pint, stack empty\n", gl.ln);
+			free_everything();
 			break;
 		}
 		case 7:
@@ -152,4 +143,5 @@ void initialize(void)
 	gl.ln = 0;
 	gl.read = NULL;
 	gl.stack = NULL;
+	gl.qs = false;
 }
